@@ -66,5 +66,23 @@ describe("transformRows", function () {
 })
 
 describe("convertFile", function () {
-    it("should write JSON to a file")
+    var outFile = "calculatedVals.json"
+      , fs      = require("fs")
+      ;
+
+    afterEach(function () {
+        fs.unlink(outFile)
+    })
+
+    it("should write an Array of {val: Number} to disk", function (done) {
+
+        // I don't need to test anything, really, beyond getting the output written
+        theSuite.convertFile("calc.json", theCruciable.addHelper, outFile)
+
+        // this feels weird and kind of bad
+        fs.exists(outFile, function (itDoes) {
+            itDoes.should.be.true
+            done()
+        })
+    })
 })

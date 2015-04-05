@@ -118,10 +118,6 @@ myTest.prototype.transformRows = function (rows, keyColumn, listColumn) {
     return resObj
 };
 
-module.exports.addHelper = function add(o) {
-    return {val: o.a + o.b };
-}
-
 myTest.prototype.convertFile = function (inFileName, calcFunction, outFileName) {
     /*
      import a JSON file from the current directory using the inFileName that contains an array of objects
@@ -131,9 +127,20 @@ myTest.prototype.convertFile = function (inFileName, calcFunction, outFileName) 
      the calc.json file and local "add" function have been included to assist with testing
      */
 
+    var fs = require("fs")
+      , path = require("path")
+      , valueObjects = require(path.join(__dirname, inFileName))
+      ;
 
+    var resArray = valueObjects.map(function (valueObj) {
+        return calcFunction(valueObj)
+    })
+
+    fs.writeFile(outFileName, JSON.stringify(resArray))
 };
 
 
 module.exports = myTest;
-
+module.exports.addHelper = function add(o) {
+    return {val: o.a + o.b };
+}
