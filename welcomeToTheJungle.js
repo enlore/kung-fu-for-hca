@@ -76,8 +76,9 @@ describe("convertFile", function () {
       , fs      = require("fs")
       ;
 
-    afterEach(function () {
+    afterEach(function (done) {
         fs.unlink(outFile)
+        done()
     })
 
     it("should write an Array of {val: Number} to disk", function (done) {

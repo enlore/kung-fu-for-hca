@@ -135,7 +135,7 @@ myTest.prototype.convertFile = function (inFileName, calcFunction, outFileName) 
         return calcFunction(valueObj)
     })
 
-    fs.writeFile(outFileName, JSON.stringify(resArray))
+    fs.writeFileSync(outFileName, JSON.stringify(resArray))
 };
 
 
