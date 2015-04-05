@@ -118,7 +118,7 @@ myTest.prototype.transformRows = function (rows, keyColumn, listColumn) {
     return resObj
 };
 
-function add(o) {
+module.exports.addHelper = function add(o) {
     return {val: o.a + o.b };
 }
 
