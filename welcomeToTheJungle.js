@@ -1,14 +1,23 @@
-var should  = require("should")
-  , sinon   = require("sinon")
-  ;
+var should  = require("should");
 
-/* do the hustle
- * do do do do do do do do
- */
 var theCruciable = require("./testFile")
+  , theSuite = new theCruciable()
 
 describe("getGists", function () {
-    it("should pass an Array to the callback")
+    it("should pass an Array of Strings to the callback", function (done) {
+        theSuite.getGists(function (err, ids) {
+            if (err)
+                done(err)
+
+            // not super specific, granted that I'm not checking if the strings
+            // are actually gist ids, but I'm good with that considering I'm confident
+            // that I'm hitting the right API endpoint
+            ids.should.be.an.Array
+            ids[0].should.be.a.String
+            ids[1].should.be.a.String
+            done()
+        })
+    })
 })
 
 describe("isStared", function () {
