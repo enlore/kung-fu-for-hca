@@ -64,7 +64,6 @@ myTest.prototype.isStared = function (gistId, callback) {
     options.path = "/gists/" + gistId + "/star"
 
     var req = https.request(options, function (res) {
-        console.log(res.statusCode)
         if (res.statusCode === 204) {
             callback(null, true)
 
