@@ -3,6 +3,7 @@ var should  = require("should");
 var theCruciable = require("./testFile")
   , theSuite = new theCruciable()
 
+/*
 describe("getGists", function () {
     it("should pass an Array of Strings to the callback", function (done) {
         theSuite.getGists(function (err, ids) {
@@ -35,9 +36,23 @@ describe("isStared", function () {
         })
     })
 })
+*/
 
 describe("transformRows", function () {
-    it("should return an Array")
+    it("should return an Object keyed to each distinct keyColumn", function () {
+        var kc = "name"
+          , lc = "dog"
+          , rows = [{name: "bob", dog: "franklin"}, {name: "bob", dog: "jenny"}, {name: "susan", dog: "juniper"}]
+          ;
+
+        var resObject = theSuite.transformRows(rows, kc, lc)
+
+        resObject.should.be.an.Object
+        resObject.should.have.property("bob")
+        resObject.should.have.property("susan")
+    })
+
+    it("should return an Obejct with values at each key that collect all values seen across properties in the rows")
 })
 
 describe("convertFile", function () {
