@@ -26,8 +26,31 @@ myTest.prototype.getGists = function (callback) {
 
      you can use the request options above but be sure to add a path
      */
+    var responseBuff = "";
 
+    options.path = "/gists/public";
 
+    var req = https.request(options, function (res) {
+        res.on("data", function (data) {
+            responseBuff += data;
+        })
+
+        res.on("end", function () {
+            var gists = JSON.parse(responseBuff.toString());
+
+            gistIds = gists.map(function (gist) {
+                return gist.id;
+            })
+
+            callback(null, gistIds);
+        })
+    })
+
+    req.on("error", function (err) {
+        callback(err);
+    })
+
+    req.end()
 };
 
 
@@ -38,6 +61,28 @@ myTest.prototype.isStared = function (gistId, callback) {
        pass a boolean value to the callback
      */
 
+    options.path = "/gists/" + gistId + "/star";
+
+    var req = https.request(options, function (res) {
+        console.log(res.statusCode)
+        if (res.statusCode === 204) {
+            callback(null, true);
+
+        } else if (res.statusCode === 404) {
+            callback(null, false);
+
+        } else {
+            var err = new Error("I don't have a case for this statusCode " + res.statusCode);
+            err.statusCode = res.statusCode;
+            callback(err)
+        }
+    })
+
+    req.on("error", function (err) {
+        callback(err);
+    })
+
+    req.end()
 };
 
 

@@ -21,7 +21,19 @@ describe("getGists", function () {
 })
 
 describe("isStared", function () {
-    it("should pass a Bool to the callback")
+    it("should pass true to the callback if the gist is starred", function (done) {
+        // I know this gist is starred, cause it's mine and I starred it
+        var gistId = "38a2c4e545b8371be105";
+
+        theSuite.isStared(gistId, function (err, isStarred) {
+            if (err)
+                done(err)
+
+            // this is still failing, though.  not sure why
+            isStarred.should.be.true
+            done()
+        })
+    })
 })
 
 describe("transformRows", function () {
