@@ -1,0 +1,15 @@
+{
+  "name": "hca_evaluation",
+  "version": "0.0.0",
+  "description": "",
+  "main": "testFile.js",
+  "scripts": {
+    "test": "mocha --reporter spec welcomeToTheJungle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "should": "~5.2.0",
+    "mocha": "~2.2.1"
+  }
+}
