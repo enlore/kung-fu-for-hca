@@ -45,12 +45,12 @@ describe("isStared", function () {
 })
 
 describe("transformRows", function () {
-    it("should return an Object keyed to each distinct keyColumn", function () {
-        var kc = "name"
-          , lc = "dog"
-          , rows = [{name: "bob", dog: "franklin"}, {name: "bob", dog: "jenny"}, {name: "susan", dog: "juniper"}]
-          ;
+    var kc = "name"
+      , lc = "dog"
+      , rows = [{name: "bob", dog: "franklin"}, {name: "bob", dog: "jenny"}, {name: "susan", dog: "juniper"}]
+      ;
 
+    it("should return an Object keyed to each distinct keyColumn", function () {
         var resObject = theSuite.transformRows(rows, kc, lc)
 
         resObject.should.be.an.Object
@@ -59,11 +59,6 @@ describe("transformRows", function () {
     })
 
     it("should return an object containing an array of vals pulled from listColumn vals keyed to each keyColumn name", function () {
-        var kc = "name"
-          , lc = "dog"
-          , rows = [{name: "bob", dog: "franklin"}, {name: "bob", dog: "jenny"}, {name: "susan", dog: "juniper"}]
-          ;
-
         var resObject = theSuite.transformRows(rows, kc, lc)
 
         resObject["bob"].should.eql(["franklin", "jenny"])
