@@ -52,7 +52,17 @@ describe("transformRows", function () {
         resObject.should.have.property("susan")
     })
 
-    it("should return an Obejct with values at each key that collect all values seen across properties in the rows")
+    it("should return an object containing an array of vals pulled from listColumn vals keyed to each keyColumn name", function () {
+        var kc = "name"
+          , lc = "dog"
+          , rows = [{name: "bob", dog: "franklin"}, {name: "bob", dog: "jenny"}, {name: "susan", dog: "juniper"}]
+          ;
+
+        var resObject = theSuite.transformRows(rows, kc, lc)
+
+        resObject["bob"].should.eql(["franklin", "jenny"])
+        resObject["susan"].should.eql(["juniper"])
+    })
 })
 
 describe("convertFile", function () {

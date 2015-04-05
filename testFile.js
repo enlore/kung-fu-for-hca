@@ -101,9 +101,17 @@ myTest.prototype.transformRows = function (rows, keyColumn, listColumn) {
     var resObj = {}
 
     rows.forEach(function (row) {
+        var kcVal = row[keyColumn]
+          , lcVal = row[listColumn]
+
         // if the value of the kc on the row isn't a property on our resObj, set it as such
-        if (!resObj[row[keyColumn]]) {
-            resObj[row[keyColumn]] = null
+        if (! resObj.hasOwnProperty(kcVal)) {
+            resObj[kcVal] = []
+            resObj[kcVal].push(lcVal)
+
+        // otherwise we know we have that key, so we push the val at listColumn onto that key's array
+        } else {
+            resObj[kcVal].push(lcVal)
         }
     })
 
